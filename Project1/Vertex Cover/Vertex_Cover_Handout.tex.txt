@@ -1,0 +1,111 @@
+\documentclass{article}
+\textwidth 7.5in
+\textheight 9.5in
+\oddsidemargin -.5in
+\evensidemargin -.5in
+\topmargin-.75in   
+\usepackage{graphics, graphicx, color, xcolor}   
+\usepackage{amsmath, amssymb, amsthm} \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{comment} 
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{color}
+\newenvironment{solution}
+  {\begin{proof}[Solution]}
+  {\end{proof}}
+ \definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\begin{document}
+\begin{center}
+    \large\textbf{Algorithms}\\
+    \Large\textbf{Vertex Cover Handout}
+\end{center}
+
+\section{Introduction}
+You are in charge of security at the Museum of Algorithms. The museum's corridors are filled with priceless objects that need to be constantly watched, you having taken an algorithms class decide to represent this as a graph and see that it is the Minimum Vertex Cover Problem. The Graph has $m$ edges with $n$ verticies between them. Your goal is to find the minimum number of verticies, $g\leq n$ you need to cover so that all $m$ edges are being watched by at least one edge
+\section{Example}
+Consider the graph instance below: 
+
+\begin{center}
+    
+
+\begin{tikzpicture}[node distance={20mm},main/.style = {draw, circle}] 
+\node[main] (1) {$1$};
+\node[main] (2) [right of=1] {$2$};
+\node[main] (3) [below of=1]{$4$};
+\node[main] (4) [below of=2]{$5$};
+
+
+\draw[-] (2)--(3);
+\draw[-] (1)--(4);
+\draw[-] (4)--(2);
+
+\draw[-] (4)--(3);
+\draw[-] (1)--(3);
+;
+\end{tikzpicture} 
+\end{center}
+
+Here we find that the minimum vertex cover is 2, where we choose nodes $4$ and $5$. Because when we choose these two nodes, the set of edges connected them to is equal to all the edges in the graph. In other words, if this graph represents the museam and we we station our guards at these two intersections, $4$ and $5$, all the hallways are being watched.
+
+\section{Solution Methods}
+Two ideas (described in English) for algorithms are described next (in English). For pseudocode, see the next section.
+\subsection{Exhaustive Approach}
+Create a power set of the set of all vertices. You then iterate through the power set and if a set is covers all hallways and it has fewer guards than the current minimum, save the subset. Continue until you have fully iterated through the power set.
+\subsection{Greedy Heuristic Approach}
+You have a list of all possible guard placements (intersections of hallways) and the number of hallways they watch. You then put the guard at the intersection watching the most hallways, if there is a tie you choose the intersection that has the alphabetically lower label. You then update the list of placements and the respective hallway count subtracting those that are now watched by the guards. Repeat this until all hallways are being watched.
+\newpage
+\section{Pseudocode for exhaustive and heuristic approaches}
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwData{Vertices in the graph \textit{V}}
+\KwResult{\textit{minVC} An integer for the minumum vertex cover, \textit{VC} an array of the verticies in the vertex cover}
+Let \textit{PowerSet} = list of all subsets of \textit{V}\;
+\textit{minVC}=$\infty$ \;
+\textit{VC}=\{ \}\;
+\For {$\textit{subset} \in \textit{Powerset}$ \KwDo}{
+\textit{subsetVC}=\textit{subset.length})\;
+\If{\textit{subset.isValid} \textbf{\text{and}} \textit{subsetVC} $<$ \textit{minVC}}{
+\textit{minVC}=\textit{subsetVC}\;
+\textit{VC}= \textit{subset}\;
+}
+}
+\caption{Exhaustive Approach}
+\end{algorithm}
+\begin{algorithm}[H]
+\KwData{$V$all vertices in graph $G$,$E$ and all edges between the nodes of $G$}
+\KwResult{$minVC$ An integer for the minimum vertex cover, $VC$ an array of the vertices in the vertex cover}
+\textit{VC}=\{ \}\;
+\textit{minVC}=0 \;
+\While {\textit{E} is \textbf{not} empty}{
+\textit{vertex} = MostUncoveredEdges(\textit{V}, \textit{E}) \;
+\For{$\textit{edge} \in \textit{E}$}{
+\If{\textit{edge} \text{connects to} \textit{vertex}}{
+\textit{E}.\text{remove}(\textit{edge})\;}
+}
+\textit{minVC}+=1\;
+\textit{V}.\text{remove}(\textit{vertex})\;
+\textit{VC}.\text{insert}(\textit{vertex})\;
+\caption{Greedy-Heuristic Approach}
+}\end{algorithm}
+\end{document}
