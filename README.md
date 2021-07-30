@@ -11,7 +11,7 @@ Project 2: (Algo Bowl) Students are given an NP hard optimization problem where 
         1) 
 
 
-Project 3: (Dynamic Programming) Students are provided with a recurrence relation and then develop dynamic programming and traceback algorithms to solve the problem specified.
+Project 3: (Dynamic Programming) Students are provided with a recurrence relation and then develop a dynamic programming algorithm with a tracebakc step to solve the problem specified.
         1) Tesseract Stacking: This is a 4D itertion of the Box Stacking Problem which in itself is an iteration of longest increasing subsequence
         2) Plane or Train: 
         3) Best Metro Network: This is an abstraction of the Optimal Binary Search Tree problem. 
