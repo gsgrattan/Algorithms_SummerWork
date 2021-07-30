@@ -1,0 +1,115 @@
+\documentclass{article}
+\textwidth 7.5in
+\textheight 9.5in
+\oddsidemargin -.5in
+\evensidemargin -.5in
+\topmargin-.75in   
+\usepackage{graphics, graphicx, color, xcolor}   
+\usepackage{amsmath, amssymb, amsthm} \usepackage{algorithm2e}
+\usepackage{comment} 
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{color}
+\newenvironment{solution}
+  {\begin{proof}[Solution]}
+  {\end{proof}}
+ \definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\begin{document}
+\begin{center}
+    \large\textbf{Algorithms}\\
+    \Large\textbf{Hamming Distance Project [100 pts]}
+\end{center}
+
+
+
+\section{Introduction}
+The objective of the project is to (1) implement the greedy-heuristics and exhaustive approaches to solving the Minimum Hamming Distance Problem, (2) measure their run times, and (3) compare these results with their asymptotic complexities. \\ Your program should assume the input file as follows:
+\begin{verbatim}
+    7
+    5
+    10110
+    11110
+    11000
+    10100
+    00110
+    11011
+    11111
+\end{verbatim}
+The first line contains $k$ the length of binary strings is $n$ the number of. Your output should return an integer, the minimum maximum hamming distance and the corresponding binary string. It should be formatted as follows:
+\begin{verbatim}
+    2
+    11110
+\end{verbatim}
+Where the first line is the minimum max hamming distance, and the second line is the corresponding binary string.\\ \\ \textit{Note}: there may be multiple strings that satisfy the problem, any one of them will do, so long as they are correct. Additionally the optimal binary string may or may not be an element of the given set.\\ \\
+The two solution approaches were discussed in a handout, worksheet, and youtube video.
+\begin{enumerate}
+    \item The first approach is the exhaustive algorithm, you need to generate all possible binary strings of length $k$ and calculate the hamming distance for each of those and each of the strings in the given set, and you return the minimum max hamming distance and the corresponding string.
+    \item Initialize an array of zeros of length $k$. Iterate through the given set of binary strings and add the value at all indices at the corresponding index in the array. Once done divide each value by $n$, if the value is less than 0.5 set it to 0, otherwise, set it to 1. The values in the array are now the values for a binary string of length $k$. Calculate the hamming distance between this new string and all values in the given set, and return the maximum value and the string.
+\end{enumerate}
+\newpage
+\section{Deliverables (consult the rubric on Canvas for this project)}
+\subsection{Report}
+\begin{enumerate}
+
+\item 
+
+[15 pts] Explain the details of your two implementations. Specifically,
+in both cases, discuss how you {\em efficiently} implemented high-level 
+``english" statements provided in the pseudo-code. {\em Please include a 
+listing of your code in an appendix.} 
+
+\item
+
+[15 pts] Determine the worst-case time complexity of your algorithms in
+terms of $n$ and $m$. (This will depend on your implementation.) 
+
+\item
+
+[20 pts] Use a random number generator to devise inputs for 
+your algorithms for {\bf at least} four different values of $n$ and $m$. The 
+values of $n$ and $m$ may need to be different for the two approaches and 
+should be chosen with the following in mind: 
+\begin{enumerate}
+\item $n$ and $m$ should be large enough so that you can reliably determine the 
+runtime of your algorithm
+by using an appropriate timing function call such as clock() to time your 
+program; i.e., the minimum run time should be well above the lowest unit measured by your clock function.
+\item Also choose $n$ so that you can experimentally verify the 
+theoretical runtime you derived above. 
+\end{enumerate}
+For each $n$, determine the run time by taking the average of three runs on 
+the same input. This reduces the likelihood of inaccuracies due to system load. 
+Display your results in a table. Explain your choice of $n$.
+
+\item
+
+[10 pts] Match theory and practice: Argue/demonstrate that your experimental 
+runtimes are consistent with the theoretical complexities you derived.
+
+\end{enumerate}
+\subsection{Online Verification on Canvas}
+[40 pts] Verification: you will need to run both of your algorithms on inputs supplied by us.  {\em Please ensure that your exhaustive algorithm is able to run when $k=25$ (it might take a few minutes).}
+
+
+\end{document}

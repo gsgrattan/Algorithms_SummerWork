@@ -1,0 +1,138 @@
+\documentclass{article}
+\textwidth 7.5in
+\textheight 9.5in
+\oddsidemargin -.5in
+\evensidemargin -.5in
+\topmargin-.75in   
+\usepackage{graphics, graphicx, color, xcolor}   
+\usepackage{amsmath, amssymb, amsthm} \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{comment} 
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{color}
+\newenvironment{solution}
+  {\begin{proof}[Solution]}
+  {\end{proof}}
+ \definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\begin{document}
+\begin{center}
+    \large\textbf{Algorithms}\\
+    \Large\textbf{Hamming Distance Handout}
+\end{center}
+\section{Introduction}
+Hamming distance is a metric for comparing two binary strings of equal length, we will discuss hamming distance in depth below. It has applications all over the field of computer 
+
+
+The minimum hamming distance problem is defined as follows: Given an  array $S$ of $k$ binary strings of length $n$. Find the string $y$ such that for  $\forall x\in S$ you minimize the maximum hamming distance $H(x,y)$.\\ 
+\section{Example}
+\subsection{Hamming Distance}
+Given two binary strings of length 10 we can calculate the hamming distance by counting the number of bits that are different. Given the two strings below:
+\begin{verbatim}
+    0100111001
+    1100110101
+\end{verbatim}
+The hamming distance is 3, because the binary strings differ in 3 places, at indices 0, 6, and 7.\\
+For the example where the strings are exactly the same:
+\begin{verbatim}
+    0100111001
+    0100111001
+\end{verbatim}
+The hamming distance is 0.\\
+For the example where the strings are complements (opposite) of each other:
+\begin{verbatim}
+    0100111001
+    1011000110
+\end{verbatim}
+The hamming distance would be 10, the length of the strings.
+\subsection{Minimum Hamming Distance}
+Given the following set of 3 binary strings of length 4:
+\begin{verbatim}
+    {1100, 1011, 1101}
+\end{verbatim}
+Find the string that minimizes the maximum hamming distance over all strings.
+For this example the optimal string is \begin{verbatim}
+    1101
+\end{verbatim}
+which has a maximum hamming distance of 1.
+
+\section{Solution Methods}
+\subsection{Exhaustive}
+Generate every possible binary string of length $n$. Then for each string in that list you find the maximum hamming distance for that string over all strings in your given set. store the string that minimizes the maximum hamming distance. Repeat until every possible string has been tested.
+\subsection{Greedy Heuristic}
+Initialize an array of zeros of length $n$. Treat the values in the binary strings as separate integers. For each string in the given set add the value at index to it's respective index in the array, continue until all values have been used. Then divide each value by the number of strings you were give. This should force the values in the array to be in the range [0,1]. Now iterate through the array and if the value is strictly less than 0.5 set it to 0, otherwise set it to 1. now calculate the maximum hamming distance for this new binary string. 
+\section{Pseudocode for exhaustive and greedy-heuristic approaches}
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwData{$k$ the length of the binary strings,\\ $n$ the number of binary strings,\\ $S$ the given set of binary strings}
+\KwResult{$ham$ the minimum max hamming distance,\\ $minStr$ the binary string which minimizes the maximum hamming distance over the set}
+$allStrings$= All possible binary strings of length $k$\;
+$ham$=$\infty$\;
+$minString$=""\;
+\For{$string1$ in $allStrings$}{
+$currMax$ = 0\;
+\For{$string2$ in $S$}{
+$hamDist$=HammingDistance($string1$, $string2$)\;
+\If{$hamDist > currMax$}{
+    $currMax$=$hamDist$\;
+}
+}
+\If{$currMax<currMin$}{
+$currMin$ = $currMax$\;
+$minStr$=$string1$\;
+}
+}
+\caption{Exhaustive Approach}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwData{$k$ the length of the binary strings,\\ $n$ the number of binary strings,\\ $S$ the given set of binary strings}
+\KwResult{$ham$ the minimum max hamming distance,\\ $minStr$ the binary string which minimizes the maximum hamming distance over the set}
+$newString$ = array of zeros of length $k$\;
+
+\For{$string$ in $S$}{
+\For{$i$ in [0,$k$)}{
+$newString$[i]+=$string$[i]\;
+}
+}
+\For{$value$ in $newString$}{
+\uIf{$value/n\geq 0.5$}{
+$value$ =1\;
+}
+\Else{
+$value$=0\;
+}
+}
+$minStr$=string($newString$)\;
+$ham$= 0\;
+\For{$string$ in $S$}{
+$hamDist$=HammingDistance($minStr$, $string$)\;
+\If{$hamDist>ham$}{
+$ham$=$hamDist$\;
+}
+}
+\caption{Greedy-Heuristic Approach}
+\end{algorithm}
+
+\end{document}
