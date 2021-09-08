@@ -1,5 +1,5 @@
 # Algorithms_SummerWork
-This is my collection of work from Summer '21 working under Dinesh Mehta, where I developed coursework for the Algorithms class at Mines.
+This is my collection of work from Summer '21 working under Dinesh Mehta, where I developed coursework for the Algorithms class (CSCI 406) at Colorado School of Mines.
 
 I was tasked with developing new project pormpts, handouts, inputs and outputs for 3 semester projects which are outlined below
 
