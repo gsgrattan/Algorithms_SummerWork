@@ -15,3 +15,5 @@ Project 3: (Dynamic Programming) Students are provided with a recurrence relatio
         1) Tesseract Stacking: This is a 4D itertion of the Box Stacking Problem which in itself is an iteration of longest increasing subsequence
         2) Plane or Train: 
         3) Best Metro Network: This is an abstraction of the Optimal Binary Search Tree problem. 
+        
+ NOTE: The zip files in the subdirectories are the zipped TeX files for the handouts. There are some instances where I have the TeX files on their own and others where they are in zipped folders.
