@@ -16,4 +16,4 @@ Project 3: (Dynamic Programming) Students are provided with a recurrence relatio
         2) Plane or Train: 
         3) Best Metro Network: This is an abstraction of the Optimal Binary Search Tree problem. 
         
- NOTE: The zip files in the subdirectories are the zipped TeX files for the handouts. There are some instances where I have the TeX files on their own and others where they are in zipped folders.
+ NOTE: The zip files in the subdirectories are the zipped TeX files for the handouts. There are some instances where I have the uncompressed TeX files on their own and others where they are in zipped folders.
